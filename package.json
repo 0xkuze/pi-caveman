@@ -1,5 +1,5 @@
 {
-  "name": "pi-caveman",
+  "name": "caveman-pi",
   "version": "1.0.0",
   "description": "Caveman mode for pi — terse, no-fluff LLM responses with a /caveman toggle",
   "keywords": ["pi-package"],

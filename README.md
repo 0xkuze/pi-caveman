@@ -1,4 +1,4 @@
-# pi-caveman
+# caveman-pi
 
 Caveman mode extension for [pi](https://github.com/mariozechner/pi-coding-agent).
 
@@ -7,7 +7,7 @@ Forces ultra-terse LLM responses: no filler, no preamble, no fluff. Technical su
 ## Install
 
 ```
-pi install npm:pi-caveman
+pi install npm:caveman-pi
 ```
 
 ## Usage
@@ -19,5 +19,5 @@ When active, every LLM response is injected with the Caveman Ultra system prompt
 ## Uninstall
 
 ```
-pi remove npm:pi-caveman
+pi remove npm:caveman-pi
 ```
