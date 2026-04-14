@@ -1,0 +1,24 @@
+{
+  "name": "pi-caveman",
+  "version": "1.0.0",
+  "description": "Caveman mode for pi — terse, no-fluff LLM responses with a /caveman toggle",
+  "keywords": ["pi-package"],
+  "license": "MIT",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-coding-agent": "*"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "extensions"
+  ],
+  "pi": {
+    "extensions": ["./extensions"]
+  }
+}
