@@ -58,22 +58,32 @@ Code/commits/PRs: write normal. User instructions override. Persist until toggle
 
 const STATUS_ID = "caveman";
 
-function updateStatus(ctx: { ui: any }, on: boolean) {
-	ctx.ui.setStatus(STATUS_ID, on ? "🪨 CAVEMAN ON" : "🪨 CAVEMAN OFF");
+function updateWidget(ctx: { ui: any }, on: boolean) {
+	ctx.ui.setWidget(
+		STATUS_ID,
+		(tui, theme) => ({
+			render() {
+				const color: "success" | "error" = on ? "success" : "error";
+				const text = on ? "🪨 CAVEMAN ON" : "🪨 CAVEMAN OFF";
+				return [theme.fg(color, text)];
+			},
+		}),
+		{ placement: "belowEditor" },
+	);
 }
 
 export default function (pi: ExtensionAPI) {
 	let enabled = true;
 
 	pi.on("session_start", async (_event, ctx) => {
-		updateStatus(ctx, enabled);
+		updateWidget(ctx, enabled);
 	});
 
 	pi.registerCommand("caveman", {
 		description: "Toggle caveman mode (terse LLM responses)",
 		handler: async (_args, ctx) => {
 			enabled = !enabled;
-			updateStatus(ctx, enabled);
+			updateWidget(ctx, enabled);
 			ctx.ui.notify(`Caveman mode: ${enabled ? "ON" : "OFF"}`, "info");
 		},
 	});
