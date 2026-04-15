@@ -16,7 +16,8 @@
     "node": ">=18"
   },
   "files": [
-    "extensions"
+    "extensions",
+    "scripts"
   ],
   "pi": {
     "extensions": ["./extensions"]

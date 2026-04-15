@@ -1,4 +1,6 @@
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
+import { resolve } from "path";
+import { compressFile } from "../scripts/compress.ts";
 
 const CAVEMAN_PROMPT = `
 # Caveman Ultra — ACTIVE EVERY RESPONSE
@@ -79,6 +81,29 @@ export default function (pi: ExtensionAPI) {
 			enabled = !enabled;
 			updateStatus(ctx, enabled);
 			ctx.ui.notify(`Caveman mode: ${enabled ? "ON" : "OFF"}`, "info");
+		},
+	});
+
+	pi.registerCommand("compress", {
+		description: "Compress a markdown file into caveman format (saves tokens)",
+		handler: async (args, ctx) => {
+			const filepath = args.trim();
+			if (!filepath) {
+				ctx.ui.notify("Usage: /compress <filepath>", "error");
+				return;
+			}
+			const absPath = resolve(ctx.cwd ?? process.cwd(), filepath);
+			ctx.ui.notify(`Compressing ${filepath}...`, "info");
+			try {
+				const success = compressFile(absPath);
+				if (success) {
+					ctx.ui.notify(`✅ Compressed: ${filepath}`, "info");
+				} else {
+					ctx.ui.notify(`Skipped: not natural language`, "info");
+				}
+			} catch (e: any) {
+				ctx.ui.notify(`❌ ${e.message}`, "error");
+			}
 		},
 	});
 
